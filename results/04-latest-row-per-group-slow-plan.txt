@@ -1,0 +1,31 @@
+Unique (actual rows=22 loops=1)
+  Buffers: shared hit=19106 read=16549
+  ->  Gather Merge (actual rows=83 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=19106 read=16549
+        ->  Sort (actual rows=28 loops=3)
+              Sort Key: e.shipment_id, e.happened_at DESC
+              Sort Method: quicksort  Memory: 26kB
+              Buffers: shared hit=19106 read=16549
+              Worker 0:  Sort Method: quicksort  Memory: 26kB
+              Worker 1:  Sort Method: quicksort  Memory: 27kB
+              ->  Hash Join (actual rows=28 loops=3)
+                    Hash Cond: (e.shipment_id = s.id)
+                    Buffers: shared hit=19074 read=16549
+                    ->  Parallel Seq Scan on tracking_events e (actual rows=1333333 loops=3)
+                          Buffers: shared hit=18892 read=16549
+                    ->  Hash (actual rows=22 loops=3)
+                          Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                          Buffers: shared hit=86
+                          ->  Bitmap Heap Scan on shipments s (actual rows=22 loops=3)
+                                Recheck Cond: (customer_id = 777)
+                                Heap Blocks: exact=22
+                                Buffers: shared hit=86
+                                ->  Bitmap Index Scan on idx_shipments_customer (actual rows=22 loops=3)
+                                      Index Cond: (customer_id = 777)
+                                      Buffers: shared hit=20
+Planning:
+  Buffers: shared hit=170
+Planning Time: 0.556 ms
+Execution Time: 183.219 ms

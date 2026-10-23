@@ -1,0 +1,1 @@
+-- No schema change: the query switches from OFFSET to keyset pagination (see fast.sql).

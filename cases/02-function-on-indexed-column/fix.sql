@@ -1,0 +1,1 @@
+-- No schema change: the query itself is rewritten (see fast.sql).

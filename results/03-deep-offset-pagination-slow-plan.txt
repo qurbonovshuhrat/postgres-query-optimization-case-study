@@ -1,0 +1,8 @@
+Limit (actual rows=50 loops=1)
+  Buffers: shared hit=501917
+  ->  Index Scan using idx_shipments_created_id on shipments (actual rows=500050 loops=1)
+        Buffers: shared hit=501917
+Planning:
+  Buffers: shared hit=100
+Planning Time: 0.375 ms
+Execution Time: 311.093 ms

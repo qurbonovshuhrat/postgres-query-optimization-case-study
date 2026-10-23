@@ -1,0 +1,18 @@
+Limit (actual rows=5 loops=1)
+  Buffers: shared hit=8519 read=2970
+  ->  Sort (actual rows=5 loops=1)
+        Sort Key: created_at DESC
+        Sort Method: quicksort  Memory: 25kB
+        Buffers: shared hit=8519 read=2970
+        ->  Gather (actual rows=5 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=8516 read=2970
+              ->  Parallel Seq Scan on shipments (actual rows=2 loops=3)
+                    Filter: ((customer_id = 12345) AND (status = 'in_transit'::text))
+                    Rows Removed by Filter: 333332
+                    Buffers: shared hit=8516 read=2970
+Planning:
+  Buffers: shared hit=97
+Planning Time: 0.489 ms
+Execution Time: 55.162 ms

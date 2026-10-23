@@ -1,0 +1,9 @@
+Limit (actual rows=5 loops=1)
+  Buffers: shared hit=11
+  ->  Index Scan using idx_shipments_customer_status_created on shipments (actual rows=5 loops=1)
+        Index Cond: ((customer_id = 12345) AND (status = 'in_transit'::text))
+        Buffers: shared hit=11
+Planning:
+  Buffers: shared hit=132
+Planning Time: 0.466 ms
+Execution Time: 0.086 ms

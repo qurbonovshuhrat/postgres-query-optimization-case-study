@@ -1,0 +1,22 @@
+Sort (actual rows=22 loops=1)
+  Sort Key: s.id
+  Sort Method: quicksort  Memory: 26kB
+  Buffers: shared hit=119
+  ->  Nested Loop (actual rows=22 loops=1)
+        Buffers: shared hit=116
+        ->  Bitmap Heap Scan on shipments s (actual rows=22 loops=1)
+              Recheck Cond: (customer_id = 777)
+              Heap Blocks: exact=22
+              Buffers: shared hit=28
+              ->  Bitmap Index Scan on idx_shipments_customer (actual rows=22 loops=1)
+                    Index Cond: (customer_id = 777)
+                    Buffers: shared hit=6
+        ->  Limit (actual rows=1 loops=22)
+              Buffers: shared hit=88
+              ->  Index Scan using idx_events_shipment_happened on tracking_events e (actual rows=1 loops=22)
+                    Index Cond: (shipment_id = s.id)
+                    Buffers: shared hit=88
+Planning:
+  Buffers: shared hit=168
+Planning Time: 0.803 ms
+Execution Time: 0.594 ms

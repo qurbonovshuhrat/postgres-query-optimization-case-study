@@ -1,0 +1,10 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: bench
+      POSTGRES_PASSWORD: bench
+      POSTGRES_DB: shipping
+    ports:
+      - "5433:5432"
+    command: ["postgres", "-c", "shared_buffers=256MB", "-c", "work_mem=16MB"]
